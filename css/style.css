@@ -1564,16 +1564,16 @@ ul.cart-list > li.total > .btn:hover {
 }
 /*------------------------------------------------------------------ All Pages -------------------------------------------------------------------*/
 .all-title-box {
-  background: url("../images/all-bg-title.jpg") no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -ms-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  text-align: center;
-  background-attachment: fixed;
-  padding: 70px 0px;
-  position: relative;
+    background: url("../images/background1.jpeg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    background-attachment: fixed;
+    padding: 70px 0px;
+    position: relative;
 }
 .all-title-box::before {
   background: rgba(0, 0, 0, 0.6);
@@ -2439,17 +2439,18 @@ ul.cart-list > li.total > .btn:hover {
   padding: 70px 0px;
 }
 .contact-info-left {
-  padding: 20px;
-  background: url(../images/contact-bg.jpg) no-repeat center;
-  background-size: cover;
+    padding: 20px;
+    background: url(../images/background10.jpeg) no-repeat center;
+    background-size: cover;
 }
-.contact-info-left h2 {
-  font-size: 22px;
-  font-weight: 700;
-}
-.contact-info-left p {
-  margin-bottom: 15px;
-}
+
+    .contact-info-left h2 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+    .contact-info-left p {
+        margin-bottom: 15px;
+    }
 .contact-info-left ul li {
   margin-bottom: 12px;
 }
