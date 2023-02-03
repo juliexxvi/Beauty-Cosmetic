@@ -158,8 +158,12 @@
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                         </ul>
-                                                        <c:url value ="http://localhost:8080/beauty-cosmetic-workspace/product-details?id=${product.id }" var='addToCart'/>
-                                                        <a class="cart" href="${addToCart }">Add to Cart</a>
+                                                        <%-- <c:url value ="http://localhost:8080/beauty-cosmetic-workspace/product-details?id=${product.id }" var='addToCart'/> --%>
+                                                    <!--     <a class="cart" href="/http://localhost:8080/beauty-cosmetic-workspace/cart/">Add to Cart</a> -->
+                                                    <form action="/beauty-cosmetic-workspace/cart/addToCart" method="POST">
+                                                    <input name="id" type="hidden" value="${product.id }" />
+                                                    <button class="cart">Add to Cart</button>
+                                                     </form>
                                                     </div>
                                                 </div>
                                                 <div class="why-text">
@@ -174,6 +178,7 @@
                                             </div>
                                         </div>
                            			  </c:forEach>
+                           			 
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">

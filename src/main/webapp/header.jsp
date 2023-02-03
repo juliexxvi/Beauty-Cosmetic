@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="entity.ProductCart" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +31,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="http://localhost:8080/beauty-cosmetic-workspace/list">Sidebar Shop</a></li>
                                 <li><a href="http://localhost:8080/beauty-cosmetic-workspace/product-details">Shop</a></li>
-                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="http://localhost:8080/beauty-cosmetic-workspace/cart">Cart</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="my-account.html">My Account</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
@@ -59,21 +63,26 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
+                      <%--   <c:if test="${ cart != null }"> --%>
+							<%
+								HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>)request.getAttribute("cart");
+								if (cart != null) {
+									
+								
+								for (Map.Entry<Integer, ProductCart> entry: cart.entrySet()) {
+									Integer key = entry.getKey();
+									ProductCart productCart = entry.getValue();
+							%>
+							<li>
+	                            <a href="#" class="photo"><img src="<%= productCart.getProduct().getImageUrl() %>" class="cart-thumb" alt="" /></a>
+	                            <h6><a href="#"><%= productCart.getProduct().getName() %></a></h6>
+	                            <p>1x - <span class="price"> <%= productCart.getProduct().getUnitPrice() %> </span></p>
+	                        </li> 
+	                    	 
+	                    	<% } }%>
+                    	
+                    	<%-- </c:if> --%>
+               
                         <li class="total">
                             <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>

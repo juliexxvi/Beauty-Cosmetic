@@ -36,7 +36,7 @@ public class ProductDetailsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		ProductDao productDAO = new ProductDao();
-		Product productDetails= productDAO.selectProductById(id);
+		Product productDetails= productDAO.selectProductById(Integer.parseInt(id));
         RequestDispatcher dispatcher = request.getRequestDispatcher("productDetails.jsp");
         request.setAttribute("productDetails", productDetails);
         dispatcher.forward(request, response);

@@ -90,7 +90,7 @@ public class ProductServlet extends HttpServlet {
 		request.setAttribute("category", category);
 		request.setAttribute("brand", brand);
 
-        Product existingProduct= productDao.selectProductById(id);
+        Product existingProduct= productDao.selectProductById(Integer.parseInt(id));
 //        System.out.print(existingProduct.getId());
         RequestDispatcher dispatcher = request.getRequestDispatcher("updateProduct.jsp");
         request.setAttribute("existingProduct", existingProduct);
