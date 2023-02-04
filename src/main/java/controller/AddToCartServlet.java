@@ -47,13 +47,11 @@ public class AddToCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String actionString = request.getPathInfo();
-			System.out.println("Do get cart");
-			System.out.println("Action String");
-			System.out.println(actionString);
 		
 			if (actionString == null) {
 				actionString = "/";
 			}
+			
 			switch (actionString) {
 				case "/":
 					showCart(request, response);
@@ -62,6 +60,7 @@ public class AddToCartServlet extends HttpServlet {
 		} catch (SQLException ex) {
             throw new ServletException(ex);
         }
+		
 		return;
 	}
 
@@ -70,20 +69,17 @@ public class AddToCartServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>) session.getAttribute("cart");
-		System.out.println("show cart");	
-		System.out.println(cart);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp");
         request.setAttribute("cart", cart);
 	    dispatcher.forward(request, response);
 	}
+	
 
 	public void addToCart(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
 		String id = request.getParameter("id");
-		System.out.println("Run add to cart");
-		System.out.println("id " +id);
 		ProductCart productCart;
 		
-		if (request.getParameter("id") != null) {
+		if (id != null) {
 			int intId = Integer.parseInt(id);
 			Product product = productDao.selectProductById(intId);
 			HttpSession session = request.getSession();
@@ -103,22 +99,40 @@ public class AddToCartServlet extends HttpServlet {
 					cart.put(intId, productCart);
 				}
 			}
-			session.setAttribute("cart", cart);
 			
-			//print out product name to console
-//			for (Map.Entry<Integer, ProductCart> entry: cart.entrySet()) {
-//				System.out.println("name of product" + entry.getValue().getProduct().getBrandId());
-//				System.out.println("quantity" + entry.getValue().getQuantity());
-//			}
+			session.setAttribute("cart", cart);
 			response.sendRedirect("/beauty-cosmetic-workspace/cart");
 			return;
 		}
 	}
 	
-	public void updateQuantity(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	public void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+		try {
+			Map<String, String[]> parameterMap = request.getParameterMap();
+			HashMap<Integer, ProductCart> updatedCart = new HashMap<Integer, ProductCart>();
+			for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			    String id = entry.getKey();
+			    if (id.startsWith("product-cart-")) {
+			    	
+			        int quantity = Integer.parseInt(entry.getValue()[0]);
+			        int productId = Integer.parseInt(id.replace("product-cart-", ""));
+			        Product product = productDao.selectProductById(productId);
+			        ProductCart productCart = new ProductCart(quantity, product);
+			        updatedCart.put(productId, productCart);
+			    }
+			}
+			HttpSession session = request.getSession();
+			session.setAttribute("cart", updatedCart);
+			response.sendRedirect("/beauty-cosmetic-workspace/cart");
+			return;
+		} catch (Exception ex) {
+			throw new ServletException(ex);
+		}
 	}
+	
+//	public void checkout(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+//		
+//	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -126,9 +140,6 @@ public class AddToCartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String actionString = request.getPathInfo();
-			System.out.println("Do get cart");
-			System.out.println("Action String");
-			System.out.println(actionString);
 		
 			switch (actionString) {
 				case "/addToCart":
@@ -137,8 +148,10 @@ public class AddToCartServlet extends HttpServlet {
 				case "/updateQuantity":
 					updateQuantity(request, response);
 					break;
+//				case "/checkout":
+//					checkout(request, response);
+//					break;
 				default: 
-					System.out.println(actionString);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				    dispatcher.forward(request, response);
 					

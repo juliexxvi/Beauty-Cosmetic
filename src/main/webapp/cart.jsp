@@ -105,6 +105,7 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
+        	<form class="update-box" action="http://localhost:8080/beauty-cosmetic-workspace/cart/updateQuantity" method="POST">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-main table-responsive">
@@ -120,45 +121,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${ cart != null }">
-                              
+								<%
+									HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>)request.getAttribute("cart");
+									if (cart != null) {
 									
-										<%
-										HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>)request.getAttribute("cart");
-										
-										for (Map.Entry<Integer, ProductCart> entry: cart.entrySet()) {
-											Integer key = entry.getKey();
-											ProductCart productCart = entry.getValue();
-										%>
-									  <tr>
-										<td class="thumbnail-img">
-										    <a href="#">
-										        <img class="img-fluid" src="<%= productCart.getProduct().getImageUrl() %>" alt="" />
-										    </a>
-										</td>
-										<td class="name-pr">
-										    <h3>
-										        <%= productCart.getProduct().getName() %>
-										    </h3>
-										</td>
-										<td class="price-pr">
-										    <p><%= productCart.getProduct().getUnitPrice() %></p>
-										</td>
-										<td class="quantity-box"><input type="number" size="4" value="<%= productCart.getQuantity() %>" min="0" step="1"
-										        class="c-input-text qty text"></td>
-										<td class="total-pr">
-										    <p>$ 80.0</p>
-										</td>
-										<td class="remove-pr">
-										    <a href="#">
-										        <i class="fas fa-times"></i>
-										    </a>
-										</td>
-									
-									</tr>
-									 	<% } %>
-									
-                                </c:if>
+								
+									for (Map.Entry<Integer, ProductCart> entry: cart.entrySet()) {
+										Integer key = entry.getKey();
+										ProductCart productCart = entry.getValue();
+								%>
+						  		<tr>
+									<td class="thumbnail-img">
+									    <a href="#">
+									        <img class="img-fluid" src="<%= productCart.getProduct().getImageUrl() %>" alt="" />
+									    </a>
+									</td>
+									<td class="name-pr">
+									    <h3>
+									        <%= productCart.getProduct().getName() %>
+									    </h3>
+									</td>
+									<td class="price-pr">
+									    <p><%= productCart.getProduct().getUnitPrice() %></p>
+									</td>
+									<td class="quantity-box"><input type="number" name="product-cart-<%= productCart.getProduct().getId() %>" size="4" value="<%= productCart.getQuantity() %>" min="1" step="1"
+									        class="c-input-text qty text"></td>
+									<td class="total-pr">
+									    <p><%= productCart.getQuantity()*productCart.getProduct().getUnitPrice() %></p>
+									</td>
+									<td class="remove-pr">
+									    <a href="#">
+									        <i class="fas fa-times"></i>
+									    </a>
+									</td>
+							
+								</tr>
+             				   <% }} %>
                             </tbody>
                         </table>
                     </div>
@@ -166,24 +164,15 @@
             </div>
 
             <div class="row my-5">
-                <div class="col-lg-6 col-sm-6">
-                    <div class="coupon-box">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code"
-                                type="text">
-                 <!--            <div class="input-group-append">
-                                <button class="btn btn-theme" type="button">Apply Coupon</button>
-                            </div> -->
-                        </div>
+           
+                <div class="col-lg-12 col-sm-12">
+                	<div class="update-box">
+                    
+                        <input value="Update Cart" type="submit">
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-6">
-                    <form class="update-box" action="http://localhost:8080/beauty-cosmetic-workspace/cart/updateQuantity" method="POST">
-                        <input value="Update Cart" type="submit">
-                    </form>
-                </div>
             </div>
-
+			</form>
             <div class="row my-5">
                 <div class="col-lg-8 col-sm-12"></div>
                 <div class="col-lg-4 col-sm-12">
@@ -218,7 +207,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html"
+                <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/beauty-cosmetic-workspace/checkout"
                         class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 

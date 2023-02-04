@@ -63,7 +63,6 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
-                      <%--   <c:if test="${ cart != null }"> --%>
 							<%
 								HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>)request.getAttribute("cart");
 								if (cart != null) {
@@ -81,7 +80,6 @@
 	                    	 
 	                    	<% } }%>
                     	
-                    	<%-- </c:if> --%>
                
                         <li class="total">
                             <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
