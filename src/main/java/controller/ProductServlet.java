@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.BrandDao;
 import dao.CategoryDao;
@@ -17,6 +19,7 @@ import dao.ProductDao;
 import entity.Brand;
 import entity.Category;
 import entity.Product;
+import entity.ProductCart;
 
 /**
  * Servlet implementation class HomeServlet
@@ -177,7 +180,9 @@ public class ProductServlet extends HttpServlet {
 		// get products from dbUtil
 		List < Product > products = productDao.selectAllProducts();
 		List < Category > categories = CategoryDao.selectAllCategory();
-		// add products to request
+		HttpSession session = request.getSession();
+		HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>) session.getAttribute("cart");
+        request.setAttribute("cart", cart);
 		request.setAttribute("products", products);
 		request.setAttribute("categories", categories);
 

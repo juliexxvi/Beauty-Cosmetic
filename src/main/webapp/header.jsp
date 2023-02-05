@@ -82,7 +82,7 @@
                     	
                
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="http://localhost:8080/beauty-cosmetic-workspace/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $<%= total %> </span>
                         </li>
                         <% } }%>

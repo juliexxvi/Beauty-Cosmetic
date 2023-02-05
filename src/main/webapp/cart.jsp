@@ -39,11 +39,6 @@
                             <link rel="stylesheet" href="css/custom.css">
                             <link rel="stylesheet" href="css/all.css">
 
-                            <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
                         </head>
 
                     <body>
@@ -196,11 +191,16 @@
                                     <div class="col-lg-8 col-sm-12"></div>
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="order-box">
-                                            <% if (cart !=null) { int total=0; for (Map.Entry<Integer, ProductCart>
+                                        
+                                        	<% int total=0;  %>
+                                            <% if (cart !=null) { 
+                                            	
+                                            	for (Map.Entry<Integer, ProductCart>
                                                 entry: cart.entrySet()) {
                                                 total += entry.getValue().getQuantity() *
                                                 entry.getValue().getProduct().getUnitPrice();
                                                 %>
+                                                <% }} %>
                                                 <h3>Order summary</h3>
                                                 <div class="d-flex">
                                                     <h4>Sub Total</h4>
@@ -213,10 +213,6 @@
                                                     <div class="ml-auto font-weight-bold"> $ 0 </div>
                                                 </div>
                                                 <hr class="my-1">
-                                                <!--                         <div class="d-flex">
-                            <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
-                        </div> -->
                                                 <div class="d-flex">
                                                     <h4>Tax</h4>
                                                     <div class="ml-auto font-weight-bold"> $ <%= Math.round((total -
@@ -234,7 +230,7 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <% }} %>
+                                                
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex shopping-box"><a
