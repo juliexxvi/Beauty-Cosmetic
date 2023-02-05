@@ -114,13 +114,13 @@ public class ProductServlet extends HttpServlet {
 		int brandId = 0;
 		String brandIdString = request.getParameter("brand");
 		if (brandIdString != null) {
-			brandId = Integer.parseInt(request.getParameter("brand"));
+			brandId = Integer.parseInt(brandIdString.trim());
 		} 
 		
 		int categoryId = 0;
 		String categoryIdSring = request.getParameter("category");
 		if (categoryIdSring != null) {
-			categoryId = Integer.parseInt(request.getParameter("category"));
+			categoryId = Integer.parseInt(categoryIdSring.trim());
 		} 
 		
 		String lotNumber = request.getParameter("lotNumber");
