@@ -16,6 +16,7 @@ public class ProductDao {
 	Connection conn = null;
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
+	
 	public List < Product >  selectAllProducts() throws SQLException {
 		List < Product > products = new ArrayList < > ();
 		
@@ -103,7 +104,6 @@ public class ProductDao {
     }
 	
     public void insertProduct(Product product) throws SQLException {
-        // try-with-resource statement will auto close the connection.
         try {
         	conn = DBUtil.makeConnection();
         	String sql = "INSERT INTO product" + "  (name, image_URL, package_size, description, unit_price, brand_id, LOT_number, category_id) VALUES " +

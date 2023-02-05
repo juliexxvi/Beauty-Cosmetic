@@ -1,6 +1,6 @@
 package entity;
 
-public class OrderDetails {
+public class OrderDetail {
 	int id;
 	int productId;
 	int orderId;
@@ -8,9 +8,17 @@ public class OrderDetails {
 	float unitPrice;
 	float discountRate;
 	
-	public OrderDetails(int id, int productId, int orderId, int quantity, float unitPrice, float discountRate) {
+	public OrderDetail(int id, int productId, int orderId, int quantity, float unitPrice, float discountRate) {
 		super();
 		this.id = id;
+		this.productId = productId;
+		this.orderId = orderId;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.discountRate = discountRate;
+	}
+	
+	public OrderDetail(int productId, int orderId, int quantity, float unitPrice, float discountRate) {
 		this.productId = productId;
 		this.orderId = orderId;
 		this.quantity = quantity;

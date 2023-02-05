@@ -25,20 +25,20 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/beauty-cosmetic-workspace/Home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:8080/beauty-cosmetic-workspace/AboutUs">About Us</a></li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
                                 <li><a href="http://localhost:8080/beauty-cosmetic-workspace/list">Sidebar Shop</a></li>
-                                <li><a href="http://localhost:8080/beauty-cosmetic-workspace/product-details">Shop</a></li>
+                               <!--  <li><a href="http://localhost:8080/beauty-cosmetic-workspace/product-details">Shop</a></li> -->
                                 <li><a href="http://localhost:8080/beauty-cosmetic-workspace/cart">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="http://localhost:8080/beauty-cosmetic-workspace/checkout">Checkout</a></li>
                                 <li><a href="my-account.html">My Account</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:8080/beauty-cosmetic-workspace/ContactUs">Contact Us</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -50,7 +50,6 @@
                         <li class="side-menu">
                             <a href="#">
                                 <i class="fa fa-shopping-bag"></i>
-                                <span class="badge">3</span>
                                 <p>My Cart</p>
                             </a>
                         </li>
@@ -66,11 +65,12 @@
 							<%
 								HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>)request.getAttribute("cart");
 								if (cart != null) {
-									
+									int total = 0;
 								
 								for (Map.Entry<Integer, ProductCart> entry: cart.entrySet()) {
 									Integer key = entry.getKey();
 									ProductCart productCart = entry.getValue();
+									total += entry.getValue().getQuantity() * entry.getValue().getProduct().getUnitPrice();
 							%>
 							<li>
 	                            <a href="#" class="photo"><img src="<%= productCart.getProduct().getImageUrl() %>" class="cart-thumb" alt="" /></a>
@@ -78,13 +78,14 @@
 	                            <p>1x - <span class="price"> <%= productCart.getProduct().getUnitPrice() %> </span></p>
 	                        </li> 
 	                    	 
-	                    	<% } }%>
+	                    	
                     	
                
                         <li class="total">
                             <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                            <span class="float-right"><strong>Total</strong>: $<%= total %> </span>
                         </li>
+                        <% } }%>
                     </ul>
                 </li>
             </div>

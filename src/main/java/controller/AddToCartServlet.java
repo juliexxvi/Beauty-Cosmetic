@@ -130,10 +130,6 @@ public class AddToCartServlet extends HttpServlet {
 		}
 	}
 	
-//	public void checkout(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-//		
-//	}
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -148,9 +144,6 @@ public class AddToCartServlet extends HttpServlet {
 				case "/updateQuantity":
 					updateQuantity(request, response);
 					break;
-//				case "/checkout":
-//					checkout(request, response);
-//					break;
 				default: 
 					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				    dispatcher.forward(request, response);
