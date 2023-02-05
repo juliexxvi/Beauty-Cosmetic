@@ -110,6 +110,9 @@ public class ProductDao {
         	        " (?, ?, ?, ?, ?, ?, ?, ?)";
         	pstm = conn.prepareStatement(sql);
         	
+        	System.out.println(product.getBrandId());
+        	System.out.println(product.getCategoryId());
+        	
         	pstm.setString(1, product.getName());
         	pstm.setString(2, product.getImageUrl());
         	pstm.setString(3, product.getPackageSize());
