@@ -16,6 +16,7 @@ public class ProductDao {
 	Connection conn = null;
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
+	
 	public List < Product >  selectAllProducts() throws SQLException {
 		List < Product > products = new ArrayList < > ();
 		
@@ -59,7 +60,7 @@ public class ProductDao {
     }
 	}
 	
-    public Product selectProductById(String id) {
+    public Product selectProductById(int id) {
     	Product product = null;
         // Step 1: Establishing a Connection
         try {
@@ -68,7 +69,7 @@ public class ProductDao {
 			String sql = "select name, image_URL, package_size, description, unit_price, brand_id, LOT_number, category_id from product where id =?";
 			
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, id);
+			pstm.setInt(1, id);
 			
 			rs = pstm.executeQuery();
 
@@ -81,7 +82,7 @@ public class ProductDao {
                 int brandId = rs.getInt("brand_id");
                 String lotNumber = rs.getString("LOT_number");
                 int categoryId = rs.getInt("category_id");
-                product = new Product(Integer.parseInt(id), name, imageUrl, packageSize, description, unitPrice, brandId, lotNumber, categoryId);
+                product = new Product(id, name, imageUrl, packageSize, description, unitPrice, brandId, lotNumber, categoryId);
 
             }
         } catch (SQLException e) {
@@ -103,12 +104,14 @@ public class ProductDao {
     }
 	
     public void insertProduct(Product product) throws SQLException {
-        // try-with-resource statement will auto close the connection.
         try {
         	conn = DBUtil.makeConnection();
         	String sql = "INSERT INTO product" + "  (name, image_URL, package_size, description, unit_price, brand_id, LOT_number, category_id) VALUES " +
         	        " (?, ?, ?, ?, ?, ?, ?, ?)";
         	pstm = conn.prepareStatement(sql);
+        	
+        	System.out.println(product.getBrandId());
+        	System.out.println(product.getCategoryId());
         	
         	pstm.setString(1, product.getName());
         	pstm.setString(2, product.getImageUrl());

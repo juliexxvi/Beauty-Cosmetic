@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Product;
+import entity.ProductCart;
 import dao.ProductDao;
 
 /**
@@ -36,7 +39,10 @@ public class ProductDetailsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		ProductDao productDAO = new ProductDao();
-		Product productDetails= productDAO.selectProductById(id);
+		Product productDetails= productDAO.selectProductById(Integer.parseInt(id));
+		HttpSession session = request.getSession();
+		HashMap<Integer, ProductCart> cart = (HashMap<Integer, ProductCart>) session.getAttribute("cart");
+        request.setAttribute("cart", cart);
         RequestDispatcher dispatcher = request.getRequestDispatcher("productDetails.jsp");
         request.setAttribute("productDetails", productDetails);
         dispatcher.forward(request, response);

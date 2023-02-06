@@ -1,19 +1,34 @@
 package entity;
 
 public class Order {
-	int id;
+	int id; 
 	float totalAmount;
-	String customerName;
-	String customerAddress;
-	String customerContact;
+	String firstName; 
+	String lastName; 
+	String username; 
+	String emailAddress;
+	String address;
 	
-	public Order(int id, float totalAmount, String customerName, String customerAddress, String customerContact) {
+	public Order(int id, float totalAmount, String firstName, String lastName, String username, String emailAddress,
+			String address) {
 		super();
 		this.id = id;
 		this.totalAmount = totalAmount;
-		this.customerName = customerName;
-		this.customerAddress = customerAddress;
-		this.customerContact = customerContact;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.emailAddress = emailAddress;
+		this.address = address;
+	}
+	
+	public Order(float totalAmount, String firstName, String lastName, String username, String emailAddress,
+			String address) {
+		this.totalAmount = totalAmount;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.emailAddress = emailAddress;
+		this.address = address;
 	}
 	
 	public int getId() {
@@ -28,23 +43,35 @@ public class Order {
 	public void setTotalAmount(float totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	public String getCustomerName() {
-		return customerName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getCustomerAddress() {
-		return customerAddress;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getCustomerContact() {
-		return customerContact;
+	public String getUsername() {
+		return username;
 	}
-	public void setCustomerContact(String customerContact) {
-		this.customerContact = customerContact;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
